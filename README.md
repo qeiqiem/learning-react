@@ -1,10 +1,10 @@
 # Learning React
 
-### References
+## References
 
-##### 1. 코딩애플
+1. 코딩애플 [리액트 블로그 프로젝트 만들기](https://www.youtube.com/watch?v=nahwuaXmgt8&list=PLfLgtT94nNq1e6tr4sm2eH6ZZC2jcqGOy&index=2&ab_channel=%EC%BD%94%EB%94%A9%EC%95%A0%ED%94%8C)
 
-[리액트 블로그 프로젝트 만들기](https://www.youtube.com/watch?v=nahwuaXmgt8&list=PLfLgtT94nNq1e6tr4sm2eH6ZZC2jcqGOy&index=2&ab_channel=%EC%BD%94%EB%94%A9%EC%95%A0%ED%94%8C)
+<hr>
 
 ### Basic
 
