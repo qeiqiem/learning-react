@@ -2,20 +2,13 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+    let posts = "맛집리스트";
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>hi</p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    retest
-                </a>
-            </header>
+            <div className="navbar">
+                <div>D-Blog</div>
+            </div>
+            <h3> {posts} </h3>
         </div>
     );
 }
