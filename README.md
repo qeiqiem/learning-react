@@ -2,9 +2,9 @@
 
 ## References
 
-### 📂 **blog**
+-   ### 📂 **blog**
 
-코딩애플 [리액트 블로그 프로젝트 만들기](https://www.youtube.com/watch?v=nahwuaXmgt8&list=PLfLgtT94nNq1e6tr4sm2eH6ZZC2jcqGOy&index=2&ab_channel=%EC%BD%94%EB%94%A9%EC%95%A0%ED%94%8C)
+    코딩애플 [리액트 블로그 프로젝트 만들기](https://www.youtube.com/watch?v=nahwuaXmgt8&list=PLfLgtT94nNq1e6tr4sm2eH6ZZC2jcqGOy&index=2&ab_channel=%EC%BD%94%EB%94%A9%EC%95%A0%ED%94%8C)
 
 <hr>
   
@@ -12,28 +12,28 @@
 
 0.  vscode, terminal 이용
 
--   작업할 폴더 생성 후 폴더 열고 terminal open
+    -   작업할 폴더 생성 후 폴더 열고 terminal open
 
 1.  node.js 설치
 
--   node.js **create-react-app** 라이브러리를 사용해서 리액트 설치하기 위함
--   node.js를 설치하면 npm이라는 툴을 이용할 수 있고, npm으로 create-react-app을 이용할 수 있다
+    -   node.js **create-react-app** 라이브러리를 사용해서 리액트 설치하기 위함
+    -   node.js를 설치하면 npm이라는 툴을 이용할 수 있고, npm으로 create-react-app을 이용할 수 있다
 
 2.  리액트 프로젝트 생성
 
--   **npx create-react-app 프로젝트이름** → enter
--   fetch 실행 .... → 설치 완료
--   open folder → 프로젝트이름 folder
+    -   **npx create-react-app 프로젝트이름** → enter
+    -   fetch 실행 .... → 설치 완료
+    -   open folder → 프로젝트이름 folder
 
 3.  Live Server처럼 실시간으로 미리보기
 
--   terminal에 **npm start**
+    -   terminal에 **npm start**
 
 4.  App.js에 코딩하기
 
--   reactsms JSX를 사용
--   App.js의 App()함수에 html처럼 코딩하면 됨
--   class이름을 주고 싶으면 className(예약어)로 설정해야 흠
+    -   reactsms JSX를 사용
+    -   App.js의 App()함수에 html처럼 코딩하면 됨
+    -   class이름을 주고 싶으면 className(예약어)로 설정해야 흠
 
 ```javascript
 <div className="App"> </div>
@@ -65,7 +65,7 @@
         데이터를 가져와서 변수에 저장하고 HTML에 꽂아 넣는 작업
 
     javascript에서 데이터바인딩 :  
-    document.getElementById("sth") ~ innerText..  
+    `document.getElementById("sth").innerText = "abc";`  
     => 라이브러리 사용보다는 번거롭다.
 
 ```javascript
@@ -101,3 +101,79 @@ function func(){
 -   클래스로 저장해서 사용함
 
 ### 변수가 아니라 state
+
+-   데이터 바인딩을 위해 사용하는 두 가지 방법
+
+    1. 변수에 담기
+
+    ```javascript
+    let posts = "맛집 리스트";
+    ```
+
+    2. state로 담아 호출
+
+    ```javascript
+    import React, { useState } from "react"; // react의 내장함수
+
+    useState("마포구 맛집 추천");
+    /* 이렇게 선언하면 이 자리에 [a, b] 변수가 2개 담은 array가 남는다.
+     a == "마포구 맛집 추천"
+     b == a를 수정하기 위한 함수 */
+
+    // 새로 추가된 ES6 문법에 따라 아래처럼 사용이 가능하다.
+    let [a, b] = [10, 100];
+    // ==> let a = 10;
+    //     let b = 100;
+
+    // let [a, b] = useState("sth")
+    let [title, editTitle] = useState("마포구 맛집 추천");
+    let [title2, editTitle2] = useState("마포구 맛집 추천2");
+    let [title3, editTitle3] = useState(["마포구", "카페"]);
+
+    return (
+        <div className="App">
+            <div className="navbar">
+                <div>D-Blog</div>
+            </div>
+
+            {/* 변수사용 */}
+            <div className="list">
+                <h3> {posts} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+
+            {/* state사용 */}
+            <div className="list">
+                <h3> {title} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+            <div className="list">
+                <h3> {title2} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+            <div className="list">
+                <h3> {title3} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+            <div className="list">
+                <h3> {title3[0]} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+        </div>
+    );
+    ```
+
+-   State를 쓰는 이유?
+    웹이 App처럼 동작하게 만들 수 있기 때문
+
+    -   변수 : 값이 변경되면 새로고침을 해야 재렌더링이 된다.
+    -   state : 자동으로 재렌더링이 된다. (라이브서버처럼 실시간 변동 확인 가능)
+
+-   바뀔 일이 거의 없는 데이터는 변수에 담거나 하드 코딩을 해도 괜찮다.
+
+-   자주 바뀌는 데이터의 경우 state에 저장하는게 용이하다.
