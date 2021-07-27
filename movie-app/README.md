@@ -1,4 +1,4 @@
-# [ReactJS로 영화 웹 서비스 만들기](https://nomadcoders.co/react-fundamentals/)
+## [ReactJS로 영화 웹 서비스 만들기](https://nomadcoders.co/react-fundamentals/)
 
 ### 1. Order
 
@@ -21,6 +21,7 @@ import React from "react";
 -   react는 기본적으로 component와 동작한다. All is component!
 -   react는 component를 사용해 html처럼 작성하려는 경우에 필요하다.
 -   이러한 js와 html의 조합을 **JSX**라 한다. (**react에서 나온 유일한 개념**)
+    -   JSX : *JS*안의 _HTML_
 
 ```javascript
 // index.js
@@ -66,6 +67,7 @@ ReactDOM.render(
 ```
 
 -   고로, App.js에 import해 App.js에서 한 번에 로드하도록 한다.
+    -   **Everything is inside _App.js_**
 
 ```javascript
 import React from "react";

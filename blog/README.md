@@ -1,70 +1,172 @@
-# Getting Started with Create React App
+## [리액트 블로그 프로젝트 만들기](https://www.youtube.com/watch?v=nahwuaXmgt8&list=PLfLgtT94nNq1e6tr4sm2eH6ZZC2jcqGOy&index=2&ab_channel=%EC%BD%94%EB%94%A9%EC%95%A0%ED%94%8C)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 1. Setting
 
-## Available Scripts
+0.  vscode, terminal 이용
 
-In the project directory, you can run:
+    -   작업할 폴더 생성 후 폴더 열고 terminal open
 
-### `npm start`
+1.  node.js 설치
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    -   node.js **create-react-app** 라이브러리를 사용해서 리액트 설치하기 위함
+    -   node.js를 설치하면 npm이라는 툴을 이용할 수 있고(같이 다운로드 됨),  
+        npm으로 create-react-app을 이용할 수 있다
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2.  리액트 프로젝트 생성
 
-### `npm test`
+    -   **npx create-react-app 프로젝트이름** → enter
+    -   fetch 실행 .... → 설치 완료
+    -   open folder → 프로젝트이름 folder
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3.  Live Server처럼 실시간으로 미리보기
 
-### `npm run build`
+    -   terminal에 **npm start**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4.  App.js에 코딩하기
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+    -   react는 JSX를 사용
+    -   App.js의 App()함수에 html처럼 코딩하면 됨
+    -   class이름을 주고 싶으면 className(예약어)로 설정해야 흠
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+<div className="App"> </div>
+```
 
-### `npm run eject`
+5. folders
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+-   node_modules  
+    라이브러리를 모아놓은 폴더
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-   public  
+    frame역할... (내 생각)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+    static 파일 보관함 (변하지 않는 틀)
+    public > index.html이 큰 틀,
+    src > index.js가 보이는 대로 동작 실행
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-   src
+    -   App.js : 메인페이지의 HTML역할을 하는 파일
+    -   package.json : 설치한 라이브러리 목록
 
-## Learn More
+### 2. Basic Theory
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Why react?
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+-   html보다 데이터 바인딩이 편리하다. (Angular, Vue도 마찬가지)
 
-### Code Splitting
+        👀 데이터 바인딩?
+        데이터를 가져와서 변수에 저장하고 HTML에 꽂아 넣는 작업
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    javascript에서 데이터바인딩 :  
+    `document.getElementById("sth").innerText = "abc";`  
+    => 라이브러리 사용보다는 번거롭다.
 
-### Analyzing the Bundle Size
+```javascript
+import img from './img.jpg';
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+function App(){
+let posts = '맛집 리스트';
+function func(){
+  return 100
+}
+.
+.
+.
+<h1> { posts }</h1>
+<h1> { func() }</h1>
+<img src = { img } />
+}
+// 변수를 넣기만 하면 적용된다.
+// 심지어 클래스이름도 {} 변수로 적용가능하다.
+```
 
-### Making a Progressive Web App
+#### CSS 사용
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+-   html처럼 `<div style="">`은 적용이 불가하다. (js문법과 겹칠 수 있기 때문에)
+-   때문에 **object** 타입으로 써야 한다.
 
-### Advanced Configuration
+```html
+<div style={{ color: "blue", fontSize: "30px" }}> </div>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+-   font-size도 js문법에서 -연산자이기 때문에 camel case로 씀
+-   {color : 'blue', fontSize : '30px'} 이 자체를 변수에 저장해서 이용하거나
+-   클래스로 저장해서 사용함
 
-### Deployment
+#### 변수가 아니라 state
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+-   데이터 바인딩을 위해 사용하는 두 가지 방법
 
-### `npm run build` fails to minify
+    1. 변수에 담기
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    ```javascript
+    let posts = "맛집 리스트";
+    ```
+
+    2. state로 담아 호출
+
+    ```javascript
+    import React, { useState } from "react"; // react의 내장함수
+
+    useState("마포구 맛집 추천");
+    /* 이렇게 선언하면 이 자리에 [a, b] 변수가 2개 담은 array가 남는다.
+     a == "마포구 맛집 추천"
+     b == a를 수정하기 위한 함수 */
+
+    // 새로 추가된 ES6 문법에 따라 아래처럼 사용이 가능하다.
+    let [a, b] = [10, 100];
+    // ==> let a = 10;
+    //     let b = 100;
+
+    // let [a, b] = useState("sth")
+    let [title, editTitle] = useState("마포구 맛집 추천");
+    let [title2, editTitle2] = useState("마포구 맛집 추천2");
+    let [title3, editTitle3] = useState(["마포구", "카페"]);
+
+    return (
+        <div className="App">
+            <div className="navbar">
+                <div>D-Blog</div>
+            </div>
+
+            {/* 변수사용 */}
+            <div className="list">
+                <h3> {posts} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+
+            {/* state사용 */}
+            <div className="list">
+                <h3> {title} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+            <div className="list">
+                <h3> {title2} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+            <div className="list">
+                <h3> {title3} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+            <div className="list">
+                <h3> {title3[0]} </h3>
+                <p>7월 24일 발행</p>
+                <hr />
+            </div>
+        </div>
+    );
+    ```
+
+-   State를 쓰는 이유?
+    웹이 App처럼 동작하게 만들 수 있기 때문
+
+    -   변수 : 값이 변경되면 새로고침을 해야 재렌더링이 된다.
+    -   state : 자동으로 재렌더링이 된다. (라이브서버처럼 실시간 변동 확인 가능)
+
+-   바뀔 일이 거의 없는 데이터는 변수에 담거나 하드 코딩을 해도 괜찮다.
+
+-   자주 바뀌는 데이터의 경우 state에 저장하는게 용이하다.

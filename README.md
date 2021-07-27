@@ -1,18 +1,25 @@
 # Learning React
 
+> > Organize Theories of React and Make Mini-Application
+> > Every detail about the applications is in each folder. 각 프로젝트 폴더에 상세 설명을 첨부합니다.
+
 ## References
 
 -   ### 📂 **blog**
 
-    코딩애플 [리액트 블로그 프로젝트 만들기](https://www.youtube.com/watch?v=nahwuaXmgt8&list=PLfLgtT94nNq1e6tr4sm2eH6ZZC2jcqGOy&index=2&ab_channel=%EC%BD%94%EB%94%A9%EC%95%A0%ED%94%8C)
+    코딩애플 _리액트 블로그 프로젝트 만들기_
 
 -   ### 📂 [**movie-app**](https://github.com/qeiqiem/learning-react/tree/main/movie-app)
 
-    Nomad Coders [ReactJS로 영화 웹 서비스 만들기](https://nomadcoders.co/react-fundamentals/)
+    Nomad Coders _ReactJS로 영화 웹 서비스 만들기_
 
 <hr>
   
-## 1. Setting
+## 0. Setting
+1. node.js 설치
+2. editor(ex. vscode), terminal
+3. create apps
+4. coding
 
 0.  vscode, terminal 이용
 
@@ -36,33 +43,11 @@
 
 4.  App.js에 코딩하기
 
-    -   reactsms JSX를 사용
+    -   react는 JSX를 사용
     -   App.js의 App()함수에 html처럼 코딩하면 됨
     -   class이름을 주고 싶으면 className(예약어)로 설정해야 흠
 
-```javascript
-<div className="App"> </div>
-```
-
-5. folders
-
--   node_modules  
-    라이브러리를 모아놓은 폴더
-
--   public  
-    frame역할... (내 생각)
-
-    static 파일 보관함 (변하지 않는 틀)
-    public > index.html이 큰 틀,
-    src > index.js가 보이는 대로 동작 실행
-
--   src
-    -   App.js : 메인페이지의 HTML역할을 하는 파일
-    -   package.json : 설치한 라이브러리 목록
-
-## 2. Basic Theory
-
-### Why react?
+## 1. Why React?
 
 -   빠르다.
 
@@ -96,20 +81,15 @@ function func(){
 // 심지어 클래스이름도 {} 변수로 적용가능하다.
 ```
 
-### CSS 사용
+## 2. Basic Theory
 
--   html처럼 `<div style="">`은 적용이 불가하다. (js문법과 겹칠 수 있기 때문에)
--   때문에 **object** 타입으로 써야 한다.
+### Component
 
-```html
-<div style={{ color: "blue", fontSize: "30px" }}> </div>
-```
+### JSX
 
--   font-size도 js문법에서 -연산자이기 때문에 camel case로 씀
--   {color : 'blue', fontSize : '30px'} 이 자체를 변수에 저장해서 이용하거나
--   클래스로 저장해서 사용함
+### State / 변수
 
-### 변수가 아니라 state
+<!-- 수정필요 -->
 
 -   데이터 바인딩을 위해 사용하는 두 가지 방법
 
@@ -186,3 +166,16 @@ function func(){
 -   바뀔 일이 거의 없는 데이터는 변수에 담거나 하드 코딩을 해도 괜찮다.
 
 -   자주 바뀌는 데이터의 경우 state에 저장하는게 용이하다.
+
+### CSS 사용
+
+-   html처럼 `<div style="">`은 적용이 불가하다. (js문법과 겹칠 수 있기 때문에)
+-   때문에 **object** 타입으로 써야 한다.
+
+```html
+<div style={{ color: "blue", fontSize: "30px" }}> </div>
+```
+
+-   font-size도 js문법에서 -연산자이기 때문에 camel case로 씀
+-   {color : 'blue', fontSize : '30px'} 이 자체를 변수에 저장해서 이용하거나
+-   클래스로 저장해서 사용함
