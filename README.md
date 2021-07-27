@@ -6,6 +6,10 @@
 
     코딩애플 [리액트 블로그 프로젝트 만들기](https://www.youtube.com/watch?v=nahwuaXmgt8&list=PLfLgtT94nNq1e6tr4sm2eH6ZZC2jcqGOy&index=2&ab_channel=%EC%BD%94%EB%94%A9%EC%95%A0%ED%94%8C)
 
+-   ### 📂 **move-app**
+
+    Nomad Coders [ReactJS로 영화 웹 서비스 만들기](https://nomadcoders.co/react-fundamentals/)
+
 <hr>
   
 ## 1. Setting
@@ -17,7 +21,8 @@
 1.  node.js 설치
 
     -   node.js **create-react-app** 라이브러리를 사용해서 리액트 설치하기 위함
-    -   node.js를 설치하면 npm이라는 툴을 이용할 수 있고, npm으로 create-react-app을 이용할 수 있다
+    -   node.js를 설치하면 npm이라는 툴을 이용할 수 있고(같이 다운로드 됨),  
+        npm으로 create-react-app을 이용할 수 있다
 
 2.  리액트 프로젝트 생성
 
@@ -39,9 +44,7 @@
 <div className="App"> </div>
 ```
 
-## 2. Basic Theory
-
-### folders
+5. folders
 
 -   node_modules  
     라이브러리를 모아놓은 폴더
@@ -57,7 +60,13 @@
     -   App.js : 메인페이지의 HTML역할을 하는 파일
     -   package.json : 설치한 라이브러리 목록
 
+## 2. Basic Theory
+
 ### Why react?
+
+-   빠르다.
+
+    -   react는 빈 html을 로드하기 떄문에 처음에 빠르게 로딩이 가능하다. js가 모든 요소를 생성해 만들고 html에 push한다.
 
 -   html보다 데이터 바인딩이 편리하다. (Angular, Vue도 마찬가지)
 
