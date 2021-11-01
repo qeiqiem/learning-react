@@ -1,6 +1,6 @@
 # Learning React
 
-> Organize Theories of React and Make Mini-Application </br>Every detail about the applications is in each folder. _각 프로젝트 폴더에 상세 설명을 첨부합니다._
+> Organize Theories of React and Make Mini-Application </br>Every detail about the applications is in each folder. <br>_각 프로젝트 폴더에 상세 설명을 첨부합니다._
 
 ## References
 
