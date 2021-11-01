@@ -1,4 +1,7 @@
 import React, { Component } from "react"; // class type
+import Subject from "./components/Subject";
+import TOC from "./components/TOC";
+import Content from "./components/Content";
 import "./App.css";
 
 // ********* function type *********
@@ -38,52 +41,17 @@ class App extends Component {
 }
 */
 
-class Subject extends Component {
-    render() {
-        return (
-            <header>
-                <h1>WEB</h1>
-                WORLD WIDE WEB
-            </header>
-        );
-    }
-}
-
-class TOC extends Component {
-    render() {
-        return (
-            <nav>
-                <ul>
-                    <li>
-                        <a href="1.html">HTML</a>
-                    </li>
-                    <li>
-                        <a href="2.html">CSS</a>
-                    </li>
-                    <li>
-                        <a href="3.html">JAVASCRIPT</a>
-                    </li>
-                </ul>
-            </nav>
-        );
-    }
-}
-
-class Content extends Component {
-    render() {
-        return <article>HTML is HyperTextMarkupLanguage.</article>;
-    }
-}
-
-//////////////////////////////////////////////////
-
 class App extends Component {
     render() {
         return (
             <div className="App">
-                <Subject />
+                <Subject title="WEB" sub="Word Wide Web" />
+                <Subject title="React" sub="ReactJs For Web" />
                 <TOC />
-                <Content />
+                <Content
+                    title="HTML"
+                    desc="HTML is HyperTextMarkupLanguage."
+                />
             </div>
         );
     }
