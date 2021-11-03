@@ -10,5 +10,6 @@ class Content extends Component {
         );
     }
 }
-
+// 컴포넌트는 데이터를 만드는 로직.
+// 건들지 않는다.
 export default Content;

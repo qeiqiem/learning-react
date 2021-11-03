@@ -49,6 +49,8 @@ class App extends Component {
         // component 실행 시 render()전에 constructor()이 먼저 실행되어 초기화를 담당한다.
         this.state = {
             // state 초기화
+            mode: "read",
+            welcome: { title: "Welcome!", desc: "Hi, React." },
             subject: { title: "WEB", sub: "World Wide Web" },
             contents: [
                 {
@@ -70,17 +72,40 @@ class App extends Component {
         };
     }
     render() {
+        let _title,
+            _desc = null;
+        if (this.state.mode === "welcome") {
+            _title = this.state.welcome.title;
+            _desc = this.state.welcome.desc;
+        } else if (this.state.mode === "read") {
+            _title = this.state.contents[0].title;
+            _desc = this.state.contents[0].desc;
+        }
         return (
             <div className="App">
-                <Subject
+                {/* <Subject
                     title={this.state.subject.title}
                     sub={this.state.subject.sub}
-                />
+                /> */}
+                <header>
+                    <h1>
+                        <a
+                            href="/"
+                            onClick={function (e) {
+                                e.preventDefault();
+                                // this.state.mode = "welcome";
+                                this.setState({
+                                    mode: "welcome",
+                                });
+                            }.bind(this)}
+                        >
+                            {this.state.subject.title}
+                        </a>
+                    </h1>
+                    <p>{this.state.subject.sub}</p>
+                </header>
                 <TOC data={this.state.contents} />
-                <Content
-                    title="HTML"
-                    desc="HTML is HyperTextMarkupLanguage."
-                />
+                <Content title={_title} desc={_desc} />
             </div>
         );
     }
