@@ -42,12 +42,41 @@ class App extends Component {
 */
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        // state값을 초기화시킴. component 초기화.
+        // constructor 안에 코드를 짠다.
+        // component 실행 시 render()전에 constructor()이 먼저 실행되어 초기화를 담당한다.
+        this.state = {
+            // state 초기화
+            subject: { title: "WEB", sub: "World Wide Web" },
+            contents: [
+                {
+                    id: 1,
+                    title: "HTML",
+                    desc: "HTML is Hyper Text Mark-up Language... ",
+                },
+                {
+                    id: 2,
+                    title: "CSS",
+                    desc: "CSS is for design...",
+                },
+                {
+                    id: 3,
+                    title: "JavaScript",
+                    desc: "JavaScript is for interaction",
+                },
+            ],
+        };
+    }
     render() {
         return (
             <div className="App">
-                <Subject title="WEB" sub="Word Wide Web" />
-                <Subject title="React" sub="ReactJs For Web" />
-                <TOC />
+                <Subject
+                    title={this.state.subject.title}
+                    sub={this.state.subject.sub}
+                />
+                <TOC data={this.state.contents} />
                 <Content
                     title="HTML"
                     desc="HTML is HyperTextMarkupLanguage."
