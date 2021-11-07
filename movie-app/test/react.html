@@ -2,8 +2,56 @@
 <html>
 
 <body>
+  <div id="root"></div>
 </body>
+<!-- react import -->
 <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+  const root = document.getElementById("root")
+
+  // orgin
+  // const h3 = React.createElement(
+  //   "h3",
+  //   {
+  //     id: "title",
+  //     onMouseEnter: () => console.log('mouse enter'),
+  //   },
+  //   "q-t-pree-t");
+
+  // const btn = React.createElement(
+  //   "button",
+  //   {
+  //     onClick: () => console.log('clicked'),
+  //     style: {
+  //       backgroundColor: 'pink',
+  //     },
+  //   },
+  //   // button의 Property로 addEventListener을 주는 방법
+  //   "Click me!"
+  // )
+
+
+  //JSX
+  const Title = <h3 id="title" onMouseEnter={() => console.log('mouse enter')}>q-t-pree-t</h3>;
+
+  const Button = <button
+    style={{ backgroundColor: 'pink' }}
+    onClick={() => console.log('clicked')}
+
+  >Click me!</button>;
+
+  // element name (HTML 태그와 같은 이름) : 1st arg
+  // span의 property : 2nd arg
+  // span의 content : 3rd arg
+
+
+  const container = React.createElement("div", null, [Title, Button])
+
+  ReactDOM.render(container, root)
+  // React를 import했기 때문에 쓸 수 있음
+</script>
 
 </html>
