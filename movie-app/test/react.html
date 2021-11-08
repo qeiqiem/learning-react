@@ -12,24 +12,20 @@
 <script type="text/babel">
   const root = document.getElementById("root")
 
-  function App() {
+  function MinsToHrs() {
     // create State
-    const [amount, setAmount] = React.useState(0);
+    const [amount, setAmount] = React.useState('60');
     const [flip, setFlip] = React.useState(false);
-    const onChange = (e) => {
-      // console.log(e.target.value);
-      setAmount(e.target.value);
-    }
-    const reset = () => setAmount(0);
+    const onChange = (e) => setAmount(e.target.value);
+    const reset = () => setAmount('');
     const onflip = () => {
       reset();
       setFlip(current => !current);
-      console.log(flip);
+      // console.log(flip);
     } // 현재 flip값의 반대 
     return (
       (
         <div>
-          <h1 className="title">Converter</h1>
           <div>
             <label htmlFor="min">Minutes </label>
             <input
@@ -66,6 +62,71 @@
       )
     )
   }
+
+  function KmToMile() {
+    const [amount, setAmount] = React.useState(1);
+    const [km, setKm] = React.useState(true);
+    const onChange = (e) => {
+      setAmount(e.target.value)
+    };
+    const reset = () => setAmount('');
+    const onKm = () => {
+      reset();
+      setKm(cur => !cur) // 이게 바뀌면 disabled에 영향을 주니까.
+    }
+    return (
+      <div>
+        <h3>KM to MILE</h3>
+        <div>
+          <label htmlFor="km">Km </label>
+          <input
+            type="number"
+            id="km"
+            value={km ? amount : (amount / 1.609).toFixed(2)}
+            onChange={onChange}
+            disabled={!km}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="mile">Mile </label>
+          <input
+            type="number"
+            id="mile"
+            value={km ? (amount * 1.609).toFixed(2) : amount}
+            onChange={onChange}
+            disabled={km}
+          />
+        </div>
+        <div>
+          <button onClick={onKm}>{km ? 'Change Mile converter' : 'Change Km Converter'}</button>
+        </div>
+        <div>
+          <button onClick={reset}>reset</button>
+        </div>
+      </div>
+    )
+  }
+  function App() {
+    const [index, setIndex] = React.useState('1');
+    const onSelect = (e) => setIndex(e.target.value);
+    console.log('option index : ', index);
+    return (
+      (
+        <div>
+          <h1 className="title">Super Converter</h1>
+          <select value={index} onChange={onSelect}>
+            <option value="0">Minutes / Hours</option>
+            <option value="1">km / Mile</option>
+          </select>
+          {index === '0' ? <MinsToHrs /> : null}
+          {index === '1' ? <KmToMile /> : null}
+        </div>
+      )
+    )
+  }
+
+  // MinsToHrs, KmToMile, App(=root) 3개의 컴포넌트를 만들었다. (=용도에 따라 쪼개기 )
   ReactDOM.render(<App />, root);
 </script>
 
