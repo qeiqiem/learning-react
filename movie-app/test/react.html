@@ -11,66 +11,28 @@
 
 <script type="text/babel">
   const root = document.getElementById("root")
+  // 배열을 복사할 때 
+  // x = [0, 1]
+  // const [a, b] = x; 
+  // a === 0, b === 1
+  // -> 각각 배열의 [0], [1]값이 해당 값으로 선언된다. 
+  function App() {
+    const [counter, setCounter] = React.useState(0);
+    const onClick = () => {
+      // setCounter(counter + 1)
+      setCounter((current) => current + 1)
+    };
 
-  // orgin
-  // const h3 = React.createElement(
-  //   "h3",
-  //   {
-  //     id: "title",
-  //     onMouseEnter: () => console.log('mouse enter'),
-  //   },
-  //   "q-t-pree-t");
-
-  // element name (HTML 태그와 같은 이름) : 1st arg
-  // span의 property : 2nd arg
-  // span의 content : 3rd arg
-
-  // const btn = React.createElement(
-  //   "button",
-  //   {
-  //     onClick: () => console.log('clicked'),
-  //     style: {
-  //       backgroundColor: 'pink',
-  //     },
-  //   },
-  //   // button의 Property로 addEventListener을 주는 방법
-  //   "Click me!"
-  // )
-
-
-  //JSX
-  // Title, Button은 같은 형태이다. 
-  function Title() {
     return (
-      <h3
-        id="title"
-        onMouseEnter={() => console.log('mouse enter')}
-      >
-        q-t-pree-t
-      </h3>
-    );
+      (
+        <div>
+          <h3>Tocal Click : {counter}</h3>
+          <button onClick={onClick}>Click me!</button>
+        </div>
+      )
+    )
   }
-
-  const Button = () => (
-    <button
-      style={{ backgroundColor: 'pink' }}
-      onClick={() => console.log('clicked')}
-    >
-      Click me!
-    </button>
-  );
-  // 함수화 = 컴포넌트화
-
-  const Container = () => (
-    <div>
-      <Title />
-      <Button />
-    </div>
-    // component는 꼭 *대문자*로 적어준다. 아니면 React/JSX는 HTML태그로 착각할 수 있기 때문
-  )
-
-  ReactDOM.render(<Container />, root)
-  // React를 import했기 때문에 쓸 수 있음
+  ReactDOM.render(<App />, root);
 </script>
 
 </html>
