@@ -10,123 +10,33 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
-  const root = document.getElementById("root")
-
-  function MinsToHrs() {
-    // create State
-    const [amount, setAmount] = React.useState('60');
-    const [flip, setFlip] = React.useState(false);
-    const onChange = (e) => setAmount(e.target.value);
-    const reset = () => setAmount('');
-    const onflip = () => {
-      reset();
-      setFlip(current => !current);
-      // console.log(flip);
-    } // 현재 flip값의 반대 
+  function Btn({ name, color }) {
     return (
-      (
-        <div>
-          <div>
-            <label htmlFor="min">Minutes </label>
-            <input
-              id="min"
-              placeholder="Minutes"
-              type="number"
-              value={flip ? amount * 60 : amount}
-              // state val === input val
-              onChange={onChange}  // onChange: 변화가 있을 때마다 감지하는 func 
-              disabled={flip} // == disabled={flip === true}
-            // flip일 때 disabled되니까 flip이면 시간입력가능 
-            // ==> flip일때는 시간값*60으로 min 인풋창에 보여져야함.
-            // ==> 아니라면 amount 그대로 보여져야함
-            />
-          </div>
-          <div>
-            <label htmlFor="hrs">Hours </label>
-            <input
-              id="hrs"
-              placeholder="Hours"
-              type="number"
-              value={flip ? amount : Math.round(amount / 60)}
-              onChange={onChange}
-              disabled={!flip} // == disabled={flip === false}
-            // flip이 false이면 입력불가능
-            // flip이 true일 경우, 입력값 그대로 표기,
-            // 아니라면 60으로 나누어 표기
-
-            />
-          </div>
-          <button onClick={reset}>Reset</button>
-          <button onClick={onflip}>{flip ? '->Change to *Mins to Hrs*' : '->Change to *Hrs to Mins*'}</button>
-        </div>
-      )
+      <button
+        style={{
+          backgroundColor: color,
+          border: 0,
+          borderRadius: 20,
+          padding: 10,
+          color: 'white',
+          margin: '10px',
+        }}
+      >
+        {name}
+      </button >
     )
   }
 
-  function KmToMile() {
-    const [amount, setAmount] = React.useState(1);
-    const [km, setKm] = React.useState(true);
-    const onChange = (e) => {
-      setAmount(e.target.value)
-    };
-    const reset = () => setAmount('');
-    const onKm = () => {
-      reset();
-      setKm(cur => !cur) // 이게 바뀌면 disabled에 영향을 주니까.
-    }
+  function App() {
     return (
       <div>
-        <h3>KM to MILE</h3>
-        <div>
-          <label htmlFor="km">Km </label>
-          <input
-            type="number"
-            id="km"
-            value={km ? amount : (amount / 1.609).toFixed(2)}
-            onChange={onChange}
-            disabled={!km}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="mile">Mile </label>
-          <input
-            type="number"
-            id="mile"
-            value={km ? (amount * 1.609).toFixed(2) : amount}
-            onChange={onChange}
-            disabled={km}
-          />
-        </div>
-        <div>
-          <button onClick={onKm}>{km ? 'Change Mile converter' : 'Change Km Converter'}</button>
-        </div>
-        <div>
-          <button onClick={reset}>reset</button>
-        </div>
-      </div>
-    )
-  }
-  function App() {
-    const [index, setIndex] = React.useState('1');
-    const onSelect = (e) => setIndex(e.target.value);
-    console.log('option index : ', index);
-    return (
-      (
-        <div>
-          <h1 className="title">Super Converter</h1>
-          <select value={index} onChange={onSelect}>
-            <option value="0">Minutes / Hours</option>
-            <option value="1">km / Mile</option>
-          </select>
-          {index === '0' ? <MinsToHrs /> : null}
-          {index === '1' ? <KmToMile /> : null}
-        </div>
-      )
-    )
+        <Btn name="reset" color="red" />
+        <Btn name="confirm" color="blue" />
+      </div>)
   }
 
-  // MinsToHrs, KmToMile, App(=root) 3개의 컴포넌트를 만들었다. (=용도에 따라 쪼개기 )
+
+  const root = document.getElementById("root")
   ReactDOM.render(<App />, root);
 </script>
 
