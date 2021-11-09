@@ -10,11 +10,13 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
-  function Btn({ name, color }) {
+  function Btn({ name, onClick }) {
+    console.log(name, 'was rendered');
     return (
       <button
+        onClick={onClick}
         style={{
-          backgroundColor: color,
+          backgroundColor: 'gray',
           border: 0,
           borderRadius: 20,
           padding: 10,
@@ -27,11 +29,21 @@
     )
   }
 
+  const MemoBtn = React.memo(Btn);
   function App() {
+    const [value, setValue] = React.useState("origin"); //name default 설정
+    const changeValue = () => setValue("change");
+
     return (
       <div>
-        <Btn name="reset" color="red" />
-        <Btn name="confirm" color="blue" />
+        <MemoBtn name={value} onClick={changeValue} />
+        {/* 여기서 onClick은 이벤트리스너가 아니라!! prop이다! 단지 이름이 onClick일뿐
+            만약 <button onClick={}>같이 HTML 속성에 넣었다면 저건 이벤트 리스너이다.
+            커스텀 컴포넌트에 넣는다면 그건 단지 prop일 뿐이다.
+            onClick 이벤트를 설정하고 싶다면 prop을 매개변수로 전달해야 한다.
+            반대로, <Btn style={{color : "green"}} /> 적용되지 않는다. 이건 HTML 태그가 아니기 때문에
+        */}
+        <MemoBtn name="reset" />
       </div>)
   }
 
