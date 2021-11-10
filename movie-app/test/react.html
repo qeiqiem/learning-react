@@ -7,35 +7,39 @@
 <!-- react import -->
 <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script type="text/babel">
-  function Btn({ name, onClick }) {
-    console.log(name, 'was rendered'); // render poin log
+  function Btn({ name, onClick, padding }) {
     return (
       <button
         onClick={onClick}
         style={{
           backgroundColor: 'gray',
           border: 0,
-          borderRadius: 20,
-          padding: 10,
+          borderRadius: padding,
+          padding, // === padding: padding,
           color: 'white',
           margin: '10px',
-        }}
-      >
+        }}>
         {name}
       </button >
     )
   }
-  const MemoBtn = React.memo(Btn); // memo!
+
+  Btn.propTypes = {
+    name: PropTypes.string.isRequired,
+    padding: PropTypes.number,
+  }
+
   function App() {
     const [value, setValue] = React.useState("origin");
     const changeValue = () => setValue("change");
     return (
       <div>
-        <MemoBtn name={value} onClick={changeValue} />
-        <MemoBtn name="reset" />
+        <Btn name={value} onClick={changeValue} padding={20} />
+        <Btn name='reset' padding={30} />
       </div>)
   }
   const root = document.getElementById("root")
