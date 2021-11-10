@@ -1,8 +1,13 @@
 import React from "react";
-import MyComponent from "./MyComponent"; // ./ == same directory
+import Button from "./Button";
 
 function App() {
-    return <div className="App"></div>;
+    return (
+        <div className="App">
+            <h1>Wlecome back</h1>
+            <Button text={"hello"} />
+        </div>
+    );
 }
 
 export default App;
