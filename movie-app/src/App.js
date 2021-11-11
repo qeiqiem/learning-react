@@ -33,7 +33,7 @@ function App() {
                         <h2>{movie.title_long}</h2>
                         <img src={movie.medium_cover_image} />
                         <p>
-                            <strong>Jenres </strong>|
+                            <strong>Jenres </strong>
                             {movie.genres.map((g) => (
                                 <span key={g}> | {g}</span>
                             ))}
