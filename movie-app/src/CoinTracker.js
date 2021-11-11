@@ -68,7 +68,6 @@ function App() {
                     <h1>YOU CAN BUY</h1>
                 </label>
                 <input
-                    // onChange={onChange}
                     id="buy"
                     value={
                         money === ""
