@@ -2,36 +2,42 @@ import React from "react";
 import { useState, useEffect } from "react";
 
 function App() {
-    const [counter, setCounter] = useState(0);
-    const [keyword, setKeyword] = useState("");
-    const onClick = () => setCounter((cur) => cur + 1);
-    const onChange = (e) => setKeyword(e.target.value);
-
-    useEffect(() => {
-        console.log("once");
-    }, []);
-
-    useEffect(() => {
-        console.log("key");
-    }, [keyword]);
-
-    useEffect(() => {
-        console.log("click");
-    }, [counter]);
-
-    useEffect(() => {
-        console.log("keyword or click");
-    }, [keyword, counter]); // 둘 중 하나가 실행될 떄
+    const [toDo, setToDo] = useState("");
+    const [toDos, setToDos] = useState([]); // 여길 배열로 입력하지 않고 ""로 입력해서 map에 오류가 남. 배열로 인식을 못 해서..
+    const onChange = (e) => setToDo(e.target.value);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (toDo === "") {
+            return;
+        }
+        setToDos((curArry) => [toDo, ...curArry]); // 배열에 현재 state값을 추가해줌
+        setToDo("");
+    };
+    console.log(toDos);
 
     return (
         <div>
-            <input
-                value={keyword}
-                onChange={onChange}
-                type="text"
-                placeholder="search..."
-            />
-            <button onClick={onClick}>click</button>
+            <h1>TO DOS ({toDos.length})</h1>
+            <form onSubmit={onSubmit}>
+                <input
+                    type="text"
+                    placeholder="WRITE YOUR TO DOs"
+                    value={toDo}
+                    onChange={onChange}
+                ></input>
+                <button>add</button>
+            </form>
+            <hr />
+            <ul>
+                {toDos.map(
+                    (
+                        item,
+                        index //map의 함수
+                    ) => (
+                        <li key={index}>{item}</li> //React에서 list에 key값을 요구함
+                    )
+                )}
+            </ul>
         </div>
     );
 }
