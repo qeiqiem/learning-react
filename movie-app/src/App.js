@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import Movie from "./Movie";
 
 function App() {
     const [loading, setLoading] = useState(true);
@@ -29,21 +30,15 @@ function App() {
                 <h1>Loading....</h1>
             ) : (
                 movies.map((movie) => (
-                    <div>
-                        <h2>{movie.title_long}</h2>
-                        <img src={movie.medium_cover_image} />
-                        <p>
-                            {/* <strong>Jenres </strong> */}
-                            {movie.genres.map((g) => g).join(" | ")}
-                            {/* {movie.genres.map((g) => (
-                                <span key={g}> | {g}</span>
-                            ))} */}
-                        </p>
-                        <ul>
-                            <li>{movie.runtime}mins</li>
-                            <li>{movie.summary}</li>
-                        </ul>
-                    </div>
+                    <Movie
+                        key={movie.id} // map을 쓰기때문에 어쨋든 key값은 필요하다
+                        title={movie.title_long}
+                        coverImg={movie.medium_cover_image}
+                        // props는 내가 만드는 거니까 명명해서 {}값만 api에 따라주면 됨
+                        genres={movie.genres}
+                        runtime={movie.runtime}
+                        summary={movie.summary}
+                    />
                 ))
             )}
         </div>
