@@ -4,7 +4,7 @@ import { API_URL, IMAGE_BASE_URL } from "../../Config";
 import { API_KEY } from "../../ConfigKey";
 import { Row } from "antd";
 // Components
-import MainImage from "./Section/MainImage";
+import MainImage from "../../common/MainImage";
 import GridCards from "../../common/GridCards";
 
 function LandingPage() {
