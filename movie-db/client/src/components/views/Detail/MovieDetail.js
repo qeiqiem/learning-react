@@ -3,24 +3,41 @@ import { API_KEY } from "../../ConfigKey";
 import { API_URL, IMAGE_BASE_URL } from "../../Config";
 import MainImage from "../../common/MainImage";
 import MovieInfo from "./Section/MovieInfo";
+import GridCards from "../../common/GridCards";
+import { Row } from "antd";
+import Favorite from "./Section/Favorite";
 
 function MovieDetail(props) {
     let movieId = props.match.params.movieId;
-    const [movie, setMovie] = useState([]);
+    // console.log(movieId);
 
-    const getDetail = async (endPoint) => {
+    const [movie, setMovie] = useState([]);
+    const [casts, setCasts] = useState([]);
+    const [actorToggle, setActorToggle] = useState(true);
+
+    const getDetails = async (endPoint) => {
         const json = await (await fetch(endPoint)).json();
         setMovie(json);
     };
-    console.log(movie);
+
+    const getCasts = async (endPoint) => {
+        const json = await (await fetch(endPoint)).json();
+        console.log("크루정보", json);
+        setCasts(json.cast);
+    };
+
+    const onToggle = () => {
+        setActorToggle(!actorToggle);
+    };
 
     useEffect(() => {
-        // console.log(props.match);
+        console.log(props.match);
 
         let endPointCrew = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
         let endPointInfo = `${API_URL}movie/${movieId}?api_key=${API_KEY}`;
 
-        getDetail(endPointInfo);
+        getDetails(endPointInfo);
+        getCasts(endPointCrew);
     }, []);
 
     return (
@@ -40,22 +57,56 @@ function MovieDetail(props) {
                 />
             )}
             {/* body */}
-            <div style={{ width: "85%", margin: "1rem, auto" }}></div>
+            <div style={{ width: "85%", margin: "1rem, auto" }}>
+                {/* fav */}
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                    }}
+                >
+                    <Favorite
+                        movieInfo={movie}
+                        movieId={movieId}
+                        userFrom={localStorage.getItem("userId")}
+                    />
+                </div>
 
-            {/* movie info */}
-            <MovieInfo movie={movie} />
+                {/* movie info */}
+                <MovieInfo movie={movie} />
 
-            <br />
-            {/* actor grid */}
+                <br />
+                {/* actor grid */}
 
-            <div
-                style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    margin: "2rem",
-                }}
-            >
-                <button>Toggle Actor View </button>
+                <div
+                    style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        margin: "2rem",
+                    }}
+                >
+                    <button onClick={onToggle}>
+                        Toggle Actor View{" "}
+                    </button>
+                </div>
+
+                {actorToggle && ( //actorToggle이 true이면..
+                    <Row gutter={(16, 16)}>
+                        {casts &&
+                            casts.map((cast, index) => (
+                                <React.Fragment key={index}>
+                                    <GridCards
+                                        image={
+                                            cast.profile_path
+                                                ? `${IMAGE_BASE_URL}w500${cast.profile_path}`
+                                                : null
+                                        }
+                                        castName={cast.name}
+                                    />
+                                </React.Fragment>
+                            ))}
+                    </Row>
+                )}
             </div>
         </div>
     );
