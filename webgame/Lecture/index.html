@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+  <!-- 1. React로 컴포넌트 생성 -->
+  <script>
+    // html tag 생성
+    const e = React.createElement;
+
+    // class == component
+    class LikeButton extends React.Component {
+      // constructor : 가장 처음 실행되는 메서드
+      constructor(props) {
+        super(props);
+      }
+
+      render() {
+        return e('button', null, 'like '); //<button>Like</button> 이 태그를 만들'겠다'
+      }
+    }
+  </script>
+
+  <!-- 2. React DOM 으로 실제로 그려줌 (UI 반영 - rendering)-->
+  <script>
+    ReactDOM.render(e(LikeButton), document.querySelector('#root'))
+    console.log('클래스형', e(LikeButton));
+  </script>
+
+  <!-- ------------------ -->
+  <!-- 3. 함수형으로 만들어 봄 -->
+  <script>
+    const root = document.getElementById('root');
+    const btn = React.createElement('button', null, 'like')
+    ReactDOM.render(btn, root)
+    console.log('함수형', btn);
+  </script>
+
+
+
+
+
+</body>
+
+</html>
