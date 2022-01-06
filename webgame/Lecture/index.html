@@ -6,6 +6,7 @@
 </head>
 
 <body>
+  <!-- <button onclick="console.log('clicked')">Like</button> -->
   <div id="root"></div>
   <!-- 1. React로 컴포넌트 생성 -->
   <script>
@@ -17,10 +18,27 @@
       // constructor : 가장 처음 실행되는 메서드
       constructor(props) {
         super(props);
+        // 여기 상태 state 기입
+        this.state = {
+          // 상태 주르륵 나열
+          liked: false,
+        };
       }
 
       render() {
-        return e('button', null, 'like '); //<button>Like</button> 이 태그를 만들'겠다'
+        return e(
+          'button',
+          {
+            onClick: () => {
+              this.setState({ liked: true }) // 이렇게 상태를 변경한다.
+            },
+            type: 'submit'
+          },
+          // on'C'lick...! CAUTION! CAPITAL LETTER 
+          // onclick()에는 함수가 들어가니까, 함수 형태로 작성한다. 
+          // ===  <button onclick="console.log('clicked') type="submit">Like</button>
+
+          'Like ');
       }
     }
   </script>
@@ -28,17 +46,17 @@
   <!-- 2. React DOM 으로 실제로 그려줌 (UI 반영 - rendering)-->
   <script>
     ReactDOM.render(e(LikeButton), document.querySelector('#root'))
-    console.log('클래스형', e(LikeButton));
+    // console.log('클래스형', e(LikeButton));
   </script>
 
-  <!-- ------------------ -->
   <!-- 3. 함수형으로 만들어 봄 -->
-  <script>
+  <!-- <script>
     const root = document.getElementById('root');
-    const btn = React.createElement('button', null, 'like')
+    // const btn = React.createElement('button', null, 'like')
+    const btn = React.createElement('button', { onClick: () => console.log('click') }, 'like')
     ReactDOM.render(btn, root)
-    console.log('함수형', btn);
-  </script>
+    // console.log('함수형', btn);
+  </script> -->
 
 
 
