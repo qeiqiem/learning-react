@@ -3,46 +3,37 @@
 <head>
   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 
 <body>
   <div id="root"></div>
-  <!-- 1. React로 컴포넌트 생성 -->
-  <script>
-    // html tag 생성
-    const e = React.createElement;
 
+  <!-- 1. React로 컴포넌트 생성 -->
+  <script type="text/babel">
+    const e = React.createElement;
     // class == component
     class LikeButton extends React.Component {
-      // constructor : 가장 처음 실행되는 메서드
       constructor(props) {
         super(props);
-        // 여기 상태 state 기입
         this.state = {
-          // 상태 주르륵 나열
           liked: false,
         };
       }
 
       render() {
-        return e(
-          'button',
-          {
-            onClick: () => { // Camel Case ***
-              this.setState({ liked: true }) // 이렇게 상태를 변경한다.
-            },
-            type: 'submit'
-          },
-          // 상태에 따른 컨텐츠 변화.. UI에도 표기된다. 알아서 텍스트가 변경된다. 
-          this.state.liked === true ?
-            'Like ' : 'Unliked');
+        return (
+          <button type='submit' onClick={() => { this.setState({ liked: true }) }}>
+            {this.state.liked === true ? 'Like' : 'Unlike'}
+          </button >
+        )
       }
     }
   </script>
 
   <!-- 2. React DOM 으로 실제로 그려줌 (UI 반영 - rendering)-->
-  <script>
-    ReactDOM.render(e(LikeButton), document.querySelector('#root'))
+  <script type="text/babel">
+    ReactDOM.render(<LikeButton />, document.querySelector('#root'))
   </script>
 
   <!-- 3. 함수형으로 만들어 봄 -->
