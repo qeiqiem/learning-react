@@ -1,0 +1,75 @@
+<html>
+
+<head>
+  <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <!-- 1. React로 컴포넌트 생성 -->
+  <script type="text/babel">
+    const root = document.getElementById('root')
+
+    const RANDOM_NUM1 = Math.ceil(Math.random() * 9)
+    const RANDOM_NUM2 = Math.ceil(Math.random() * 9)
+
+    function Gugudan() {
+      const [first, setFirst] = React.useState(RANDOM_NUM1)
+      const [second, setSecond] = React.useState(RANDOM_NUM2)
+      const [value, setValue] = React.useState('')
+      const [result, setResult] = React.useState('')
+
+      const onChange = (e) => {
+        console.log(e.target.value)
+
+        setValue(e.target.value)
+      }
+
+      const onSubmit = (e) => {
+        e.preventDefault()
+
+        if (parseInt(first * second) === parseInt(value)) {
+          setResult(`입력값 ${value}은 정답`)
+          setFirst(Math.ceil(Math.random() * 9))
+          setSecond(Math.ceil(Math.random() * 9))
+          // setFirst(RANDOM_NUM1)
+          // setSecond(RANDOM_NUM2)
+          setValue('')
+        } else {
+          setResult(`입력값 ${value} 오답`)
+        }
+
+        console.log(value);
+        console.log(typeof (RANDOM_NUM1)); // num
+        console.log(typeof (value)); // str
+        console.log(first * second === value);
+        console.log(first * second === parseInt(value));
+      }
+
+
+      return (
+        <div>
+          <h2>{first} X {second} = </h2>
+          <form onSubmit={onSubmit}>
+            <input
+              type='number'
+              value={value}
+              onChange={onChange}
+            />
+            <button>입력</button>
+            {/* form안에 태그는 button 기본 타입값이 submit*/}
+          </form>
+          <h2>{` ${result}`}</h2>
+        </div >
+      )
+    }
+
+    ReactDOM.render(<Gugudan />, root)
+  </script>
+
+</body>
+
+</html>

@@ -30,12 +30,12 @@
             first: Math.ceil(Math.random() * 9),
             second: Math.ceil(Math.random() * 9),
             value: '',
-            result: `⭕️ 입력하신 ${this.state.value}은 정답입니다. `,
+            result: 'O',
           })
         } else {
           this.setState({
             value: '',
-            result: `❌ 입력하신 ${this.state.value}은 오답입니다. `,
+            result: 'X',
           })
         }
       }
@@ -55,12 +55,14 @@
               <input
                 type='number'
                 value={this.state.value}
+                // value를 상태값으로 지정했기 때문에 onChange가 없으면 input value값이 변경 불가능, 즉 input창에 값을 입력할 수 없다.
                 onChange={this.onChange}
-              />
+              />   {/* 꼭 /로 태그를 닫아줘야 에러가 안남 */}
+
               <button>입력</button>
-              {/* form안에 태그는 button 기본 타입값이 submit*/}
             </form>
-            <h2>{` ${this.state.result}`}</h2>
+
+            <h2>{this.state.result}</h2>
           </div >
 
         )
