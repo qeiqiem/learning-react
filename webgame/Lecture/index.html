@@ -6,7 +6,6 @@
 </head>
 
 <body>
-  <!-- <button onclick="console.log('clicked')">Like</button> -->
   <div id="root"></div>
   <!-- 1. React로 컴포넌트 생성 -->
   <script>
@@ -29,16 +28,14 @@
         return e(
           'button',
           {
-            onClick: () => {
+            onClick: () => { // Camel Case ***
               this.setState({ liked: true }) // 이렇게 상태를 변경한다.
             },
             type: 'submit'
           },
-          // on'C'lick...! CAUTION! CAPITAL LETTER 
-          // onclick()에는 함수가 들어가니까, 함수 형태로 작성한다. 
-          // ===  <button onclick="console.log('clicked') type="submit">Like</button>
-
-          'Like ');
+          // 상태에 따른 컨텐츠 변화.. UI에도 표기된다. 알아서 텍스트가 변경된다. 
+          this.state.liked === true ?
+            'Like ' : 'Unliked');
       }
     }
   </script>
@@ -46,7 +43,6 @@
   <!-- 2. React DOM 으로 실제로 그려줌 (UI 반영 - rendering)-->
   <script>
     ReactDOM.render(e(LikeButton), document.querySelector('#root'))
-    // console.log('클래스형', e(LikeButton));
   </script>
 
   <!-- 3. 함수형으로 만들어 봄 -->
@@ -55,7 +51,6 @@
     // const btn = React.createElement('button', null, 'like')
     const btn = React.createElement('button', { onClick: () => console.log('click') }, 'like')
     ReactDOM.render(btn, root)
-    // console.log('함수형', btn);
   </script> -->
 
 
