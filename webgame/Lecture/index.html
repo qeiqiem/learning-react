@@ -23,26 +23,36 @@
       onSubmit = (e) => {
         e.preventDefault();
         if (parseInt(this.state.value) === this.state.first * this.state.second) {
-          this.setState({
-            first: Math.ceil(Math.random() * 9),
-            second: Math.ceil(Math.random() * 9),
-            value: '',
-            result: `⭕️ 입력하신 ${this.state.value}은 정답입니다. `,
+          this.setState((prevState) => {
+            return {
+              first: Math.ceil(Math.random() * 9),
+              second: Math.ceil(Math.random() * 9),
+              value: '',
+              result: `⭕️ 입력하신 ${prevState.value}은 정답입니다. `,
+            }
           })
+          this.input.focus();
         } else {
-          this.setState({
-            value: '',
-            result: `❌ 입력하신 ${this.state.value}은 오답입니다. `,
+          this.setState((prevState) => {
+            return {
+              value: '',
+              result: `❌ 입력하신 ${prevState.value}은 오답입니다. `,
+            }
           })
+          this.input.focus();
         }
       }
 
-      onChange =
-        (e) => {
-          this.setState({ value: e.target.value }
-          );
-          // console.log(this.state.value);
-        }
+      onChange = (e) => {
+        this.setState({ value: e.target.value }
+        );
+        // console.log(this.state.value);
+      }
+
+      // ref 
+      input;
+
+      onRefInput = (ref) => { this.input = ref; }
 
       render() {
         return (
@@ -50,6 +60,7 @@
             <h2>{this.state.first} X {this.state.second} = </h2>
             <form onSubmit={this.onSubmit}>
               <input
+                ref={this.onRefInput}
                 type='number'
                 value={this.state.value}
                 onChange={this.onChange}
