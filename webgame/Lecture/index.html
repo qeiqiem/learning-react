@@ -12,15 +12,12 @@
   <!-- 1. React로 컴포넌트 생성 -->
   <script type="text/babel">
     class Gugudan extends React.Component {
-      constructor(props) {
-        super(props);
-        this.state = {
-          first: Math.ceil(Math.random() * 9),
-          second: Math.ceil(Math.random() * 9),
-          value: '',
-          result: '',
-        };
-      }
+      state = {
+        first: Math.ceil(Math.random() * 9),
+        second: Math.ceil(Math.random() * 9),
+        value: '',
+        result: '',
+      };
 
       // 구구단로직 - 클래스의 메서드로 만들기
       onSubmit = (e) => {
@@ -49,7 +46,7 @@
 
       render() {
         return (
-          <div>
+          <React.Fragment>
             <h2>{this.state.first} X {this.state.second} = </h2>
             <form onSubmit={this.onSubmit}>
               <input
@@ -61,8 +58,7 @@
               {/* form안에 태그는 button 기본 타입값이 submit*/}
             </form>
             <h2>{` ${this.state.result}`}</h2>
-          </div >
-
+          </React.Fragment >
         )
       }
     }
