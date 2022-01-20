@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import FileUpload from "../../utils/FileUpload";
 
+/* styles */
 import { Typography, Button, Form, Input } from "antd"; // ant design..css 프레임워크
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 
 /* styled-component  ==> try to test!*/
 const UploadDiv = styled.div`
@@ -77,6 +78,7 @@ function UploadProductPage() {
             </Header>
             <Form>
                 {/* drop zone */}
+                <FileUpload />
                 <br />
                 <br />
                 <label>이름</label>
