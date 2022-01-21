@@ -13,12 +13,14 @@
   <script type="text/babel">
     const root = document.getElementById('root')
 
-    const RANDOM_NUM1 = Math.ceil(Math.random() * 9)
-    const RANDOM_NUM2 = Math.ceil(Math.random() * 9)
+    // const RANDOM_NUM1 = Math.ceil(Math.random() * 9)
+    // const RANDOM_NUM2 = Math.ceil(Math.random() * 9)
 
+
+    // const Gugudan = () => {} 이런식으로도 사용할 수 있겠지
     function Gugudan() {
-      const [first, setFirst] = React.useState(RANDOM_NUM1)
-      const [second, setSecond] = React.useState(RANDOM_NUM2)
+      const [first, setFirst] = React.useState(Math.ceil(Math.random() * 9))
+      const [second, setSecond] = React.useState(Math.ceil(Math.random() * 9))
       const [value, setValue] = React.useState('')
       const [result, setResult] = React.useState('')
 
@@ -35,18 +37,16 @@
           setResult(`입력값 ${value}은 정답`)
           setFirst(Math.ceil(Math.random() * 9))
           setSecond(Math.ceil(Math.random() * 9))
-          // setFirst(RANDOM_NUM1)
-          // setSecond(RANDOM_NUM2)
           setValue('')
         } else {
           setResult(`입력값 ${value} 오답`)
         }
 
-        console.log(value);
-        console.log(typeof (RANDOM_NUM1)); // num
-        console.log(typeof (value)); // str
-        console.log(first * second === value);
-        console.log(first * second === parseInt(value));
+        // console.log(value);
+        // console.log(typeof (RANDOM_NUM1)); // num
+        // console.log(typeof (value)); // str
+        // console.log(first * second === value);
+        // console.log(first * second === parseInt(value));
       }
 
 
