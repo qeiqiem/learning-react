@@ -123,7 +123,7 @@ function UploadProductPage() {
                 <br />
                 <Button>확인</Button>
             </Form>
-            {console.log(continent)}
+            {/* {console.log(continent)} */}
         </UploadDiv>
     );
 }

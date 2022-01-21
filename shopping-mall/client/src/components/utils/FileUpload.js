@@ -1,25 +1,14 @@
 // utils folder => 여러 곳에서 쓰일 수 있는 컴포넌트 조합 폴더
-import React from "react";
+import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import { Icon } from "antd";
 import styled from "styled-components";
 import axios from "axios";
 
-const DropContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-`;
-
-const DropBox = styled.div`
-    width: 300px;
-    height: 240px;
-    border: 1px solid lightgray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 export default function FileUpload() {
+    /* 확인버튼(submit)으로 백엔드에 업로드한 파일을 넘겨주기 위해서 state에 저장한다. */
+    const [images, setImages] = useState([]); // 이미지 여러개 올리기 때문에 복수형, array안에 str들어가게끔
+
     const onDrop = (files) => {
         // 파일을 넘겨줄 때는 axios를 사용해서 넘겨준다 axios를 사용해서 넘겨준다 -> 상단에 axios import
 
@@ -47,11 +36,36 @@ export default function FileUpload() {
                     // 2) back : post로 전송하고 난 후 이제 back 처리를 해야 함 (라우트를 만들면 됨)
                     /*  node 부분 server -> index.js  */
 
-                    console.log(response.data); // back에서 준 정보 확인
+                    setImages([...images, response.data.filePath]); //spread operation (arr 모든 구성요소를 넣어준다) + 새로추가한 파일path
+
+                    // console.log(response.data); // back에서 준 정보 확인( success, filePath,fileName)
                 } else {
                     alert("파일 저장에 실패했습니다.");
                 }
             });
+    };
+
+    const onDelete = (img) => {
+        const currentIdx = images.indexOf(img);
+        // console.log(currentIdx); // 현재 클릭한 index를 알 수있다.
+        let newImages = [...images];
+        newImages.splice(currentIdx, 1);
+        setImages(newImages);
+
+        /* 
+        1. 이것도 되긴 됨. 하지만 images를 그대로 쓰지 않는 이유는 원본 그대로 두려고?
+         images.splice(currentIdx, 1);
+        setImages([...images]);
+
+
+        2. 
+        let newImages = [...images].splice(currentIdx, 1);
+        setImages(newImages);
+
+        이렇게 하면 클릭한 인덱스만 남고 나머지가 사라졌었음. : 즉. 삭제하려고 클릭한 인덱스가 images state로 저장됨. 왜??
+        => splice의 리턴값이 클릭한 index의 값이기 때문
+        
+        */
     };
 
     return (
@@ -71,10 +85,50 @@ export default function FileUpload() {
                     </section>
                 )}
             </Dropzone>
+            <ImageBox>
+                {/* img가 state에 하나만 있는게 아닐 수 있기 때문에 map으로 반복해준다. */}
+                {images.map((img, idx) => (
+                    <div key={idx} onClick={() => onDelete(img)}>
+                        <img
+                            src={`http://localhost:5000/${img}`}
+                            style={{
+                                minWidth: "300px",
+                                width: "300px",
+                                height: "240px",
+                            }}
+                        />
+                    </div>
+                ))}
+            </ImageBox>
+            {console.log(images)}
         </DropContainer>
     );
 }
 
+const DropContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
+const DropBox = styled.div`
+    width: 300px;
+    height: 240px;
+    border: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const ImageBox = styled.div`
+    display: flex;
+    width: 350px;
+    height: 240px;
+    overflow-x: scroll;
+`;
+
+//
+// ====================================================
+//
 /* rafc ==> arrow func !!!!!!!
 import React from 'react';
 
