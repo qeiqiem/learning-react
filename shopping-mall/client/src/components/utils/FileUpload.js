@@ -5,7 +5,7 @@ import { Icon } from "antd";
 import styled from "styled-components";
 import axios from "axios";
 
-export default function FileUpload() {
+export default function FileUpload(props) {
     /* 확인버튼(submit)으로 백엔드에 업로드한 파일을 넘겨주기 위해서 state에 저장한다. */
     const [images, setImages] = useState([]); // 이미지 여러개 올리기 때문에 복수형, array안에 str들어가게끔
 
@@ -35,10 +35,18 @@ export default function FileUpload() {
                     // 1) front : ~ post ==> front 처리
                     // 2) back : post로 전송하고 난 후 이제 back 처리를 해야 함 (라우트를 만들면 됨)
                     /*  node 부분 server -> index.js  */
+                    const newImages = [
+                        ...images,
+                        response.data.filePath,
+                    ];
+                    //spread operation (arr 모든 구성요소를 넣어준다) + 새로추가한 파일path
+                    setImages(newImages);
 
-                    setImages([...images, response.data.filePath]); //spread operation (arr 모든 구성요소를 넣어준다) + 새로추가한 파일path
+                    // ********* 부모 컴포넌트의 images state로 값을 넘겨주기 위함
+                    props.refreshFunction(newImages);
 
-                    // console.log(response.data); // back에서 준 정보 확인( success, filePath,fileName)
+                    // console.log(response.data);
+                    // back에서 준 정보 확인( success, filePath,fileName)
                 } else {
                     alert("파일 저장에 실패했습니다.");
                 }
@@ -51,6 +59,9 @@ export default function FileUpload() {
         let newImages = [...images];
         newImages.splice(currentIdx, 1);
         setImages(newImages);
+
+        // **************** 부모 컴포넌트로 전달
+        props.refreshFunction(newImages);
 
         /* 
         1. 이것도 되긴 됨. 하지만 images를 그대로 쓰지 않는 이유는 원본 그대로 두려고?

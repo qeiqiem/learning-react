@@ -7,6 +7,8 @@
 const express = require("express");
 const router = express.Router();
 const multer = require("multer");
+// Product.js model import
+const { Product } = require("../models/Product");
 
 //=================================
 //             Product
@@ -56,6 +58,20 @@ router.post("/image", (req, res) => {
     });
 
     //     이렇게 back -> front 로 정보 전달
+});
+
+router.post("/", (req, res) => {
+    /*     index.js에서 라우트타고 옴
+    UploadProductPage.js의 onSubmit()처리하기 위함 
+    -> onSubmit URL은 Axios.post("/api/product", body)이니까 /로 설정
+    */
+    //
+    // 받아온 정보를 db에 넣어준다.
+    const product = new Product(req.body);
+    product.save((err) => {
+        if (err) return res.status(400).json({ success: false, err });
+        return res.status(200).json({ success: true });
+    });
 });
 
 module.exports = router;

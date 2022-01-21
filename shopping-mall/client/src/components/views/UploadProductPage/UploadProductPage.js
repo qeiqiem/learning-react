@@ -4,6 +4,7 @@ import FileUpload from "../../utils/FileUpload";
 /* styles */
 import { Typography, Button, Form, Input } from "antd"; // ant design..css 프레임워크
 import styled from "styled-components";
+import axios from "axios";
 
 /* styled-component  ==> try to test!*/
 const UploadDiv = styled.div`
@@ -47,12 +48,12 @@ const Continents = [
     },
 ];
 
-function UploadProductPage() {
+function UploadProductPage(props) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
     const [continent, setContinent] = useState(1);
-    const [image, setImage] = useState([]);
+    const [images, setImages] = useState([]);
 
     const onChangeName = (e) => {
         setName(e.currentTarget.value);
@@ -69,6 +70,37 @@ function UploadProductPage() {
         setContinent(e.currentTarget.value);
     };
 
+    const updateImage = (newImages) => {
+        setImages(newImages);
+    };
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (!name || description || price || continent || images) {
+            return alert("모든 값을 입력해주세요");
+        }
+        // 서버에 채운 값들을 req로 보내다.
+        const body = {
+            // 로그인된 사람의 아이디
+            writer: props.user.userData._id,
+            name: name,
+            description: description,
+            price: price,
+            images: images,
+            continent: continent,
+        };
+
+        axios.post("/api/product", body).then((res) => {
+            if (res.data.success) {
+                alert("success");
+                // 업로드 성공 후 랜딩페이지로 이동
+                props.history.push("/");
+            } else {
+                alert("failed");
+            }
+        });
+    };
+
     return (
         <UploadDiv>
             {/* styled test */}
@@ -76,9 +108,13 @@ function UploadProductPage() {
                 {/* styled test */}
                 <Title level={2}>여행상품 업로드</Title>
             </Header>
-            <Form>
+            <Form onSubmit={onSubmit}>
                 {/* drop zone */}
-                <FileUpload />
+
+                {/* images state의 정보를 이곳(부모 컴포넌트)에서 알아야 서버로 img 전달이 가능하기 때문에, 여기서 prop으로 images state를 넘겨준다 
+                submit -> 전달...(?) 아님 리프레시할떄마다? */}
+                <FileUpload refreshFunction={updateImage} />
+
                 <br />
                 <br />
                 <label>이름</label>
@@ -121,7 +157,7 @@ function UploadProductPage() {
                 </select>
                 <br />
                 <br />
-                <Button>확인</Button>
+                <Button type="submit">확인</Button>
             </Form>
             {/* {console.log(continent)} */}
         </UploadDiv>
