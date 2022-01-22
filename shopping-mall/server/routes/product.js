@@ -60,13 +60,21 @@ router.post("/image", (req, res) => {
     //     이렇게 back -> front 로 정보 전달
 });
 
+//body req .... back에  이미지 정보 전달
 router.post("/", (req, res) => {
     /*     index.js에서 라우트타고 옴
     UploadProductPage.js의 onSubmit()처리하기 위함 
     -> onSubmit URL은 Axios.post("/api/product", body)이니까 /로 설정
     */
     //
-    // 받아온 정보를 db에 넣어준다.
+
+    /* 
+      // 받아온 정보를 db에 넣어준다.
+      Product 모델 안에 req의 body를 객체로 전달...
+    .save() : 저장한다는 뜻.
+    .save((err) => {}) save()의 콜백으로 err를 전달한다.
+      
+    */
     const product = new Product(req.body);
     product.save((err) => {
         if (err) return res.status(400).json({ success: false, err });

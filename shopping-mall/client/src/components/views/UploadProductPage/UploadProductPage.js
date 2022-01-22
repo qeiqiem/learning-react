@@ -6,20 +6,6 @@ import { Typography, Button, Form, Input } from "antd"; // ant design..css 프�
 import styled from "styled-components";
 import axios from "axios";
 
-/* styled-component  ==> try to test!*/
-const UploadDiv = styled.div`
-    max-width: 700px;
-    margin: 2rem auto;
-`;
-const Header = styled.h2`
-    text-align: center;
-    margin-botton: 2rem;
-`;
-
-/* antd */
-const { Title } = Typography;
-const { TextArea } = Input;
-
 /* 대륙 옵션 */
 const Continents = [
     {
@@ -51,7 +37,7 @@ const Continents = [
 function UploadProductPage(props) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(null);
     const [continent, setContinent] = useState(1);
     const [images, setImages] = useState([]);
 
@@ -70,26 +56,34 @@ function UploadProductPage(props) {
         setContinent(e.currentTarget.value);
     };
 
-    const updateImage = (newImages) => {
+    const updateImages = (newImages) => {
         setImages(newImages);
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
-        if (!name || description || price || continent || images) {
+        if (
+            !name ||
+            !description ||
+            !price ||
+            !continent ||
+            !images
+        ) {
             return alert("모든 값을 입력해주세요");
         }
-        // 서버에 채운 값들을 req로 보내다.
+
+        // Product.js의 모델
         const body = {
-            // 로그인된 사람의 아이디
+            // 로그인된 사람의 아이디, auth.js에서 props로 받아옴
             writer: props.user.userData._id,
             name: name,
             description: description,
             price: price,
             images: images,
-            continent: continent,
+            continents: continent, //?????
         };
 
+        // 서버에 채운 값들(위의 body값)을 req로 보내다.
         axios.post("/api/product", body).then((res) => {
             if (res.data.success) {
                 alert("success");
@@ -113,7 +107,7 @@ function UploadProductPage(props) {
 
                 {/* images state의 정보를 이곳(부모 컴포넌트)에서 알아야 서버로 img 전달이 가능하기 때문에, 여기서 prop으로 images state를 넘겨준다 
                 submit -> 전달...(?) 아님 리프레시할떄마다? */}
-                <FileUpload refreshFunction={updateImage} />
+                <FileUpload refreshFunction={updateImages} />
 
                 <br />
                 <br />
@@ -146,22 +140,38 @@ function UploadProductPage(props) {
                         </option>
                     ))} */}
 
-                    {Continents.map((continent) => (
+                    {Continents.map((c) => (
                         <option
-                            key={continent.key} // 1부터 시작( key에 1로 설정 )
-                            value={continent.key}
+                            key={c.key} // 1부터 시작( key에 1로 설정 )
+                            value={c.key}
                         >
-                            {continent.value}
+                            {c.value}
                         </option>
                     ))}
                 </select>
                 <br />
                 <br />
-                <Button type="submit">확인</Button>
+
+                {/* antd Button -> func안먹혀서 button으로 변경 */}
+                <button type="submit">확인</button>
             </Form>
-            {/* {console.log(continent)} */}
+            {/* {console.log(images)} */}
         </UploadDiv>
     );
 }
+
+/* styled-component  ==> try to test!*/
+const UploadDiv = styled.div`
+    max-width: 700px;
+    margin: 2rem auto;
+`;
+const Header = styled.h2`
+    text-align: center;
+    margin-botton: 2rem;
+`;
+
+/* antd */
+const { Title } = Typography;
+const { TextArea } = Input;
 
 export default UploadProductPage;

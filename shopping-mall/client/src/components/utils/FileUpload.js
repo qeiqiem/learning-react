@@ -35,15 +35,26 @@ export default function FileUpload(props) {
                     // 1) front : ~ post ==> front 처리
                     // 2) back : post로 전송하고 난 후 이제 back 처리를 해야 함 (라우트를 만들면 됨)
                     /*  node 부분 server -> index.js  */
+
+                    /* *********************** 
                     const newImages = [
                         ...images,
                         response.data.filePath,
                     ];
+
                     //spread operation (arr 모든 구성요소를 넣어준다) + 새로추가한 파일path
                     setImages(newImages);
 
                     // ********* 부모 컴포넌트의 images state로 값을 넘겨주기 위함
                     props.refreshFunction(newImages);
+
+*/
+
+                    setImages([...images, response.data.filePath]);
+                    props.refreshFunction([
+                        ...images,
+                        response.data.filePath,
+                    ]);
 
                     // console.log(response.data);
                     // back에서 준 정보 확인( success, filePath,fileName)
@@ -111,7 +122,7 @@ export default function FileUpload(props) {
                     </div>
                 ))}
             </ImageBox>
-            {console.log(images)}
+            {/* {console.log(images)} */}
         </DropContainer>
     );
 }
