@@ -27,10 +27,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).single("file");
 
-//=================================
-//             Product
-//=================================
-
 /* 
 이미 index.js에서 아래 url을 타고 왔기 때문에 
 /image 루트만 남겨 놓으면 된다. 
@@ -60,14 +56,23 @@ router.post("/image", (req, res) => {
     //     이렇게 back -> front 로 정보 전달
 });
 
+/* ***************Del test  실패!
+router.post("/delete", (req, res) => {
+    //     const fs = require("fs");
+    //     // 동기 방식으로 파일 삭제
+    //     fs.unlinkSync(`${req.path}`, (err) => {
+    //         if (err) throw err;
+    //         console.log("success del");
+    //     });
+});
+*/
+
 //body req .... back에  이미지 정보 전달
 router.post("/", (req, res) => {
     /*     index.js에서 라우트타고 옴
     UploadProductPage.js의 onSubmit()처리하기 위함 
     -> onSubmit URL은 Axios.post("/api/product", body)이니까 /로 설정
     */
-    //
-
     /* 
       // 받아온 정보를 db에 넣어준다.
       Product 모델 안에 req의 body를 객체로 전달...

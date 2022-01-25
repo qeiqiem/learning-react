@@ -68,16 +68,28 @@ export default function FileUpload(props) {
         const currentIdx = images.indexOf(img);
         // console.log(currentIdx); // 현재 클릭한 index를 알 수있다.
         let newImages = [...images];
-        newImages.splice(currentIdx, 1);
-        setImages(newImages);
-
+        const delImage = newImages.splice(currentIdx, 1);
         // **************** 부모 컴포넌트로 전달
+        setImages(newImages);
         props.refreshFunction(newImages);
+
+        // **************** 서버 파일 삭제 실패!
+        // axios
+        //     .get("/api/product/delete", { path: delImage })
+        //     .then((res) => {
+        //         if (res.data.success) {
+
+        //             console.log("삭제완료");
+        //         } else {
+        //             alert("failed");
+        //         }
+        //     });
 
         /* 
         1. 이것도 되긴 됨. 하지만 images를 그대로 쓰지 않는 이유는 원본 그대로 두려고?
          images.splice(currentIdx, 1);
         setImages([...images]);
+        ==>  리액트 state는 불변성을 지켜야 하기 때문에 newImages로 변형해야 됨!!!!!!!!!!!!!!!!!!!
 
 
         2. 
@@ -122,7 +134,7 @@ export default function FileUpload(props) {
                     </div>
                 ))}
             </ImageBox>
-            {/* {console.log(images)} */}
+            {/* {console.log("Imgsarr", images)} */}
         </DropContainer>
     );
 }
