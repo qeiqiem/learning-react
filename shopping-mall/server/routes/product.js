@@ -56,16 +56,18 @@ router.post("/image", (req, res) => {
     //     이렇게 back -> front 로 정보 전달
 });
 
-/* ***************Del test  실패!
-router.post("/delete", (req, res) => {
-    //     const fs = require("fs");
-    //     // 동기 방식으로 파일 삭제
-    //     fs.unlinkSync(`${req.path}`, (err) => {
-    //         if (err) throw err;
-    //         console.log("success del");
-    //     });
-});
-*/
+// ***************Del test  실패!
+// router.post("/delete", (req, res) => {
+//     const fs = require("fs");
+//     // 동기 방식으로 파일 삭제
+//     const path = req.path;
+
+//     fs.unlinkSync(`${path}`, (err) => {
+//         if (err) throw err;
+//         console.log("success del");
+//     });
+
+// });
 
 //body req .... back에  이미지 정보 전달
 router.post("/", (req, res) => {
@@ -85,6 +87,20 @@ router.post("/", (req, res) => {
         if (err) return res.status(400).json({ success: false, err });
         return res.status(200).json({ success: true });
     });
+});
+
+router.post("/products", (req, res) => {
+    // product collection에 들어있는 모든 상품정보 가져오기
+    // writer의 모든 정보를 가지고 옴
+    Product.find()
+        .populate("writer")
+        .exec((err, productInfo) => {
+            if (err)
+                return res.status(400).json({ success: false, err });
+            return res
+                .status(200)
+                .json({ success: true, productInfo });
+        }); // 쿼리 돌림
 });
 
 module.exports = router;

@@ -75,10 +75,9 @@ export default function FileUpload(props) {
 
         // **************** 서버 파일 삭제 실패!
         // axios
-        //     .get("/api/product/delete", { path: delImage })
+        //     .post("/api/product/delete", { path: delImage })
         //     .then((res) => {
         //         if (res.data.success) {
-
         //             console.log("삭제완료");
         //         } else {
         //             alert("failed");
