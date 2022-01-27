@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ImageSlider from "../../utils/ImageSlider";
 
 /* styles */
 // import styled from "styled-components";
-import { Icon, Col, Card, Row } from "antd";
+import { Icon, Col, Card, Row, Carousel } from "antd";
 import Meta from "antd/lib/card/Meta";
 
 const LandingPage = () => {
@@ -23,20 +24,10 @@ const LandingPage = () => {
 
     const renderCards = products.map((product, idx) => {
         console.log("product", product);
+
         return (
             <Col lg={6} md={8} xs={24} key={idx}>
-                <Card
-                    cover={
-                        <img
-                            style={{
-                                width: "100%",
-                                // height: "150px",
-                                maxHseight: "150px",
-                            }}
-                            src={`http://localhost:5000/${product.images[0]}`}
-                        />
-                    }
-                >
+                <Card cover={<ImageSlider images={product.images} />}>
                     <Meta
                         title={product.name}
                         description={`$${product.price}`}
